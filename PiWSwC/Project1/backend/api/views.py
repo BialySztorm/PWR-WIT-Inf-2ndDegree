@@ -36,11 +36,6 @@ class MessageListCreateView(generics.ListCreateAPIView):
 
         serializer.save(sender_sub=None)
 
-class MediaCreateView(generics.CreateAPIView):
-    queryset = UploadedMedia.objects.all()
-    serializer_class = UploadedMediaSerializer
-    parser_classes = [MultiPartParser, FormParser]
-
 class MediaListCreateView(generics.ListCreateAPIView):
     queryset = UploadedMedia.objects.order_by("-uploaded_at")
     serializer_class = UploadedMediaSerializer

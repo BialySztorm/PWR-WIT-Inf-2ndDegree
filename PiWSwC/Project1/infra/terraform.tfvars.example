@@ -1,0 +1,21 @@
+# Przykład pliku terraform.tfvars (użyj go jako szablonu)
+# Skopiuj na terraform.tfvars i uzupełnij wartości pasujące do twojego konta.
+
+# Jeśli nie możesz tworzyć ról IAM (np. konto AWS Academy), ustaw create_iam_roles = false i use_existing_iam = true
+# oraz podaj istniejący Instance Profile i Service Role używane przez Elastic Beanstalk.
+
+create_iam_roles = false
+use_existing_iam = true
+
+# Nazwa istniejącego Instance Profile (np. aws-elasticbeanstalk-ec2-role lub aws-elasticbeanstalk-ec2-role-<something>)
+instance_profile_name = "your-existing-instance-profile-name"
+
+# Nazwa istniejącej roli serwisowej Elastic Beanstalk (np. aws-elasticbeanstalk-service-role)
+eb_service_role_name = "your-existing-eb-service-role-name"
+
+# Region
+aws_region = "us-east-1"
+
+# Jeśli masz dedykowany front-end URL możesz go podać (opcjonalnie)
+frontend_url = ""
+

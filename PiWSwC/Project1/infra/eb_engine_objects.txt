@@ -1,0 +1,9 @@
+﻿resources/environments/e-7x4yub5cnf/_runtime/_embedded_extensions/chatapp/5bd3fba84007fef73340e17e2fa337dc	2026-04-12T20:55:37+00:00	22
+resources/environments/e-7x4yub5cnf/_runtime/_versions/chatapp/backend-eb0523c7	2026-04-12T20:55:36+00:00	21118
+resources/environments/e-7x4yub5cnf/_runtime/versions/manifest_1776027338916	2026-04-12T20:55:39+00:00	126
+resources/environments/e-w9tad9h3ur/_runtime/_embedded_extensions/chatapp/2f2a2b6633d3f3c9a25f8e5a61d42232	2026-04-12T20:50:41+00:00	22
+resources/environments/e-w9tad9h3ur/_runtime/_versions/chatapp/frontend-11c7d91a	2026-04-12T20:50:41+00:00	68746
+resources/environments/e-w9tad9h3ur/_runtime/versions/manifest_1776027043845	2026-04-12T20:50:44+00:00	128
+resources/environments/logs/bundle/e-w9tad9h3ur/i-0450beba99ba3ef95/BundleLogs-1776027332747.zip	2026-04-12T20:55:33+00:00	57159
+resources/environments/logs/deployments/e-7x4yub5cnf/eb-deployment-62b47129-2cc6-4ed6-827d-66c6df707d6a.log	2026-04-12T20:57:31+00:00	741
+resources/environments/logs/deployments/e-w9tad9h3ur/eb-deployment-ac196928-a722-4293-a31d-77553d6cc061.log	2026-04-12T20:52:07+00:00	742

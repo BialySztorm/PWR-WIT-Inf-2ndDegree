@@ -24,9 +24,12 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key-change-me")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
 
+# Dynamicznie ustawiaj ALLOWED_HOSTS z DJANGO_ALLOWED_HOSTS lub domyślnie
 allowed = os.getenv("DJANGO_ALLOWED_HOSTS") or os.getenv("ALLOWED_HOSTS")
 if allowed:
     ALLOWED_HOSTS = [h.strip() for h in allowed.split(",") if h.strip()]
+else:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -138,6 +141,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Vite
-    "http://127.0.0.1:5173",
+    "http://localhost:5173",  # Vite (dev)
+    "http://127.0.0.1:5173",  # Vite (dev)
 ]
+
+# Na AWS dodaj URL frontendu przez CORS_ALLOWED_ORIGINS_PATTERN lub zmienną środowiskową
+cors_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+if cors_origins and cors_origins[0]:
+    CORS_ALLOWED_ORIGINS.extend([o.strip() for o in cors_origins if o.strip()])
+

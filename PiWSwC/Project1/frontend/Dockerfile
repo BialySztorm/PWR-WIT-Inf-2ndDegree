@@ -14,10 +14,12 @@ ENV VITE_COGNITO_REDIRECT_URI=$VITE_COGNITO_REDIRECT_URI
 ENV VITE_COGNITO_LOGOUT_URI=$VITE_COGNITO_LOGOUT_URI
 
 COPY package*.json ./
-RUN npm ci
+# If package.json and tsconfig.json exist, install dependencies (use package-lock.json if present); otherwise skip
+RUN sh -c "if [ -f package.json ] && [ -f tsconfig.json ]; then if [ -f package-lock.json ]; then npm ci; else npm install; fi; fi"
 
 COPY . .
-RUN npm run build
+# Run build only if both package.json and tsconfig.json exist (otherwise assume prebuilt dist was provided in context)
+RUN sh -c "if [ -f package.json ] && [ -f tsconfig.json ]; then npm run build; fi"
 
 FROM nginx:1.27-alpine
 COPY --from=build /app/dist /usr/share/nginx/html

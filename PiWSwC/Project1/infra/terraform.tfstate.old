@@ -1,0 +1,2290 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 71,
+  "lineage": "96bbe1ea-22ad-a322-3834-6ac3d37ababb",
+  "outputs": {
+    "cognito_client_id": {
+      "value": "20p6mpsomr8pknmuc2halcp2tn",
+      "type": "string"
+    },
+    "cognito_user_pool_id": {
+      "value": "us-east-1_h9GgxSAQi",
+      "type": "string"
+    },
+    "db_endpoint": {
+      "value": "chatapp-db.ctu0gqkie3i7.us-east-1.rds.amazonaws.com",
+      "type": "string"
+    },
+    "frontend_url": {
+      "value": "awseb-e-v-AWSEBLoa-74VT7V6KEZCB-1935019689.us-east-1.elb.amazonaws.com",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_availability_zones",
+      "name": "available",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "all_availability_zones": null,
+            "exclude_names": null,
+            "exclude_zone_ids": null,
+            "filter": null,
+            "group_names": [
+              "us-east-1-zg-1"
+            ],
+            "id": "us-east-1",
+            "names": [
+              "us-east-1a",
+              "us-east-1b",
+              "us-east-1c",
+              "us-east-1d",
+              "us-east-1e",
+              "us-east-1f"
+            ],
+            "state": "available",
+            "timeouts": null,
+            "zone_ids": [
+              "use1-az6",
+              "use1-az1",
+              "use1-az2",
+              "use1-az4",
+              "use1-az3",
+              "use1-az5"
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "467659112385",
+            "arn": "arn:aws:sts::467659112385:assumed-role/voclabs/user4886237=Andrzej_Manderla",
+            "id": "467659112385",
+            "user_id": "AROAWZYVHX7A63VG5NTTH:user4886237=Andrzej_Manderla"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_elastic_beanstalk_solution_stack",
+      "name": "docker",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "64bit Amazon Linux 2023 v4.12.1 running Docker",
+            "most_recent": true,
+            "name": "64bit Amazon Linux 2023 v4.12.1 running Docker",
+            "name_regex": "^64bit Amazon Linux 2023 (.*) running Docker$"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cognito_user_pool",
+      "name": "chat_user_pool",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_recovery_setting": [
+              {
+                "recovery_mechanism": [
+                  {
+                    "name": "verified_email",
+                    "priority": 1
+                  },
+                  {
+                    "name": "verified_phone_number",
+                    "priority": 2
+                  }
+                ]
+              }
+            ],
+            "admin_create_user_config": [
+              {
+                "allow_admin_create_user_only": false,
+                "invite_message_template": []
+              }
+            ],
+            "alias_attributes": null,
+            "arn": "arn:aws:cognito-idp:us-east-1:467659112385:userpool/us-east-1_h9GgxSAQi",
+            "auto_verified_attributes": [
+              "email"
+            ],
+            "creation_date": "2026-04-12T17:41:37Z",
+            "custom_domain": "",
+            "deletion_protection": "INACTIVE",
+            "device_configuration": [],
+            "domain": "",
+            "email_configuration": [
+              {
+                "configuration_set": "",
+                "email_sending_account": "COGNITO_DEFAULT",
+                "from_email_address": "",
+                "reply_to_email_address": "",
+                "source_arn": ""
+              }
+            ],
+            "email_mfa_configuration": [],
+            "email_verification_message": "",
+            "email_verification_subject": "",
+            "endpoint": "cognito-idp.us-east-1.amazonaws.com/us-east-1_h9GgxSAQi",
+            "estimated_number_of_users": 0,
+            "id": "us-east-1_h9GgxSAQi",
+            "lambda_config": [],
+            "last_modified_date": "2026-04-12T17:41:37Z",
+            "mfa_configuration": "OFF",
+            "name": "chatapp-user-pool",
+            "password_policy": [
+              {
+                "minimum_length": 8,
+                "password_history_size": 0,
+                "require_lowercase": true,
+                "require_numbers": true,
+                "require_symbols": false,
+                "require_uppercase": true,
+                "temporary_password_validity_days": 7
+              }
+            ],
+            "schema": [],
+            "sign_in_policy": [
+              {
+                "allowed_first_auth_factors": [
+                  "PASSWORD"
+                ]
+              }
+            ],
+            "sms_authentication_message": "",
+            "sms_configuration": [],
+            "sms_verification_message": "",
+            "software_token_mfa_configuration": [],
+            "tags": {},
+            "tags_all": {},
+            "user_attribute_update_settings": [],
+            "user_pool_add_ons": [],
+            "user_pool_tier": "ESSENTIALS",
+            "username_attributes": [],
+            "username_configuration": [],
+            "verification_message_template": [
+              {
+                "default_email_option": "CONFIRM_WITH_CODE",
+                "email_message": "",
+                "email_message_by_link": "",
+                "email_subject": "",
+                "email_subject_by_link": "",
+                "sms_message": ""
+              }
+            ],
+            "web_authn_configuration": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cognito_user_pool_client",
+      "name": "chat_user_pool_client",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_token_validity": 0,
+            "allowed_oauth_flows": [],
+            "allowed_oauth_flows_user_pool_client": false,
+            "allowed_oauth_scopes": [],
+            "analytics_configuration": [],
+            "auth_session_validity": 3,
+            "callback_urls": [],
+            "client_secret": "",
+            "default_redirect_uri": "",
+            "enable_propagate_additional_user_context_data": false,
+            "enable_token_revocation": true,
+            "explicit_auth_flows": [
+              "ALLOW_REFRESH_TOKEN_AUTH",
+              "ALLOW_USER_PASSWORD_AUTH",
+              "ALLOW_USER_SRP_AUTH"
+            ],
+            "generate_secret": null,
+            "id": "20p6mpsomr8pknmuc2halcp2tn",
+            "id_token_validity": 0,
+            "logout_urls": [],
+            "name": "chatapp-react-client",
+            "prevent_user_existence_errors": "",
+            "read_attributes": [],
+            "refresh_token_rotation": [],
+            "refresh_token_validity": 30,
+            "supported_identity_providers": [],
+            "token_validity_units": [],
+            "user_pool_id": "us-east-1_h9GgxSAQi",
+            "write_attributes": []
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "client_secret"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "dependencies": [
+            "aws_cognito_user_pool.chat_user_pool"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "postgres_db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "address": "chatapp-db.ctu0gqkie3i7.us-east-1.rds.amazonaws.com",
+            "allocated_storage": 20,
+            "allow_major_version_upgrade": null,
+            "apply_immediately": false,
+            "arn": "arn:aws:rds:us-east-1:467659112385:db:chatapp-db",
+            "auto_minor_version_upgrade": true,
+            "availability_zone": "us-east-1b",
+            "backup_retention_period": 0,
+            "backup_target": "region",
+            "backup_window": "09:10-09:40",
+            "blue_green_update": [],
+            "ca_cert_identifier": "rds-ca-rsa2048-g1",
+            "character_set_name": "",
+            "copy_tags_to_snapshot": false,
+            "custom_iam_instance_profile": "",
+            "customer_owned_ip_enabled": false,
+            "database_insights_mode": "standard",
+            "db_name": "",
+            "db_subnet_group_name": "chatapp-db-subnets",
+            "dedicated_log_volume": false,
+            "delete_automated_backups": true,
+            "deletion_protection": false,
+            "domain": "",
+            "domain_auth_secret_arn": "",
+            "domain_dns_ips": [],
+            "domain_fqdn": "",
+            "domain_iam_role_name": "",
+            "domain_ou": "",
+            "enabled_cloudwatch_logs_exports": [],
+            "endpoint": "chatapp-db.ctu0gqkie3i7.us-east-1.rds.amazonaws.com:5432",
+            "engine": "postgres",
+            "engine_lifecycle_support": "open-source-rds-extended-support",
+            "engine_version": "16",
+            "engine_version_actual": "16.10",
+            "final_snapshot_identifier": null,
+            "hosted_zone_id": "Z2R2ITUGPM61AM",
+            "iam_database_authentication_enabled": false,
+            "id": "db-WY36ZF3P5PZ24GIHSDEWXOSZ2Q",
+            "identifier": "chatapp-db",
+            "identifier_prefix": "",
+            "instance_class": "db.t3.micro",
+            "iops": 3000,
+            "kms_key_id": "",
+            "latest_restorable_time": "",
+            "license_model": "postgresql-license",
+            "listener_endpoint": [],
+            "maintenance_window": "fri:05:04-fri:05:34",
+            "manage_master_user_password": null,
+            "master_user_secret": [],
+            "master_user_secret_kms_key_id": null,
+            "max_allocated_storage": 0,
+            "monitoring_interval": 0,
+            "monitoring_role_arn": "",
+            "multi_az": false,
+            "nchar_character_set_name": "",
+            "network_type": "IPV4",
+            "option_group_name": "default:postgres-16",
+            "parameter_group_name": "default.postgres16",
+            "password": "some_secure_password",
+            "password_wo": null,
+            "password_wo_version": null,
+            "performance_insights_enabled": false,
+            "performance_insights_kms_key_id": "",
+            "performance_insights_retention_period": 0,
+            "port": 5432,
+            "publicly_accessible": false,
+            "replica_mode": "",
+            "replicas": [],
+            "replicate_source_db": "",
+            "resource_id": "db-WY36ZF3P5PZ24GIHSDEWXOSZ2Q",
+            "restore_to_point_in_time": [],
+            "s3_import": [],
+            "skip_final_snapshot": true,
+            "snapshot_identifier": null,
+            "status": "available",
+            "storage_encrypted": false,
+            "storage_throughput": 125,
+            "storage_type": "gp3",
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null,
+            "timezone": "",
+            "upgrade_storage_config": null,
+            "username": "app",
+            "vpc_security_group_ids": [
+              "sg-05e121e9c30d0313f"
+            ]
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "password_wo"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInVwZGF0ZSI6NDgwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "aws_db_subnet_group.db_subnets",
+            "aws_subnet.public_a",
+            "aws_subnet.public_b",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_subnet_group",
+      "name": "db_subnets",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:us-east-1:467659112385:subgrp:chatapp-db-subnets",
+            "description": "Managed by Terraform",
+            "id": "chatapp-db-subnets",
+            "name": "chatapp-db-subnets",
+            "name_prefix": "",
+            "subnet_ids": [
+              "subnet-065d58e146f1cfdea",
+              "subnet-08a54eba411970a92"
+            ],
+            "supported_network_types": [
+              "IPV4"
+            ],
+            "tags": {},
+            "tags_all": {},
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.public_a",
+            "aws_subnet.public_b",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_application",
+      "name": "chat_app",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "appversion_lifecycle": [],
+            "arn": "arn:aws:elasticbeanstalk:us-east-1:467659112385:application/chatapp",
+            "description": "A chat application separated into frontend and backend.",
+            "id": "chatapp",
+            "name": "chatapp",
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_application_version",
+      "name": "backend_version",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application": "chatapp",
+            "arn": "arn:aws:elasticbeanstalk:us-east-1:467659112385:applicationversion/chatapp/backend-95239e16",
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "description": "",
+            "force_delete": false,
+            "id": "backend-95239e16",
+            "key": "backend-src.zip",
+            "name": "backend-95239e16",
+            "process": false,
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_elastic_beanstalk_application.chat_app",
+            "aws_s3_bucket.media_bucket",
+            "aws_s3_object.backend_zip",
+            "random_id.backend_version_id",
+            "random_id.bucket_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_application_version",
+      "name": "frontend_version",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application": "chatapp",
+            "arn": "arn:aws:elasticbeanstalk:us-east-1:467659112385:applicationversion/chatapp/frontend-7b307460",
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "description": "",
+            "force_delete": false,
+            "id": "frontend-7b307460",
+            "key": "frontend-src.zip",
+            "name": "frontend-7b307460",
+            "process": false,
+            "tags": {},
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_elastic_beanstalk_application.chat_app",
+            "aws_s3_bucket.media_bucket",
+            "aws_s3_object.frontend_zip",
+            "random_id.bucket_id",
+            "random_id.frontend_version_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_environment",
+      "name": "backend_env",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "status": "tainted",
+          "schema_version": 1,
+          "attributes": {
+            "all_settings": [],
+            "application": "chatapp",
+            "arn": null,
+            "autoscaling_groups": null,
+            "cname": null,
+            "cname_prefix": null,
+            "description": null,
+            "endpoint_url": null,
+            "id": "e-ymepfuczmj",
+            "instances": null,
+            "launch_configurations": null,
+            "load_balancers": null,
+            "name": "chat-backend-env",
+            "platform_arn": null,
+            "poll_interval": null,
+            "queues": null,
+            "setting": [
+              {
+                "name": "AWS_STORAGE_BUCKET_NAME",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "chatapp-media-bucket-78ac27be"
+              },
+              {
+                "name": "AssociatePublicIpAddress",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "COGNITO_APP_CLIENT_ID",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "20p6mpsomr8pknmuc2halcp2tn"
+              },
+              {
+                "name": "COGNITO_ISSUER",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "https://cognito-idp.467659112385.us-east-1.amazonaws.com/us-east-1_h9GgxSAQi"
+              },
+              {
+                "name": "COGNITO_USER_POOL_ID",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "us-east-1_h9GgxSAQi"
+              },
+              {
+                "name": "CORS_ALLOWED_ORIGINS",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "https://*.elasticbeanstalk.com"
+              },
+              {
+                "name": "DB_HOST",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "chatapp-db.ctu0gqkie3i7.us-east-1.rds.amazonaws.com"
+              },
+              {
+                "name": "DB_NAME",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "postgres"
+              },
+              {
+                "name": "DB_PASSWORD",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "some_secure_password"
+              },
+              {
+                "name": "DB_PORT",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "5432"
+              },
+              {
+                "name": "DB_USER",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "app"
+              },
+              {
+                "name": "DJANGO_ALLOWED_HOSTS",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "localhost,127.0.0.1,*.elasticbeanstalk.com"
+              },
+              {
+                "name": "DJANGO_SECRET_KEY",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "uWM%+PUZGexPt]N\u00263gkaxo$tUi+fB(JGF6+Q)R_T_P$BkCsWbR"
+              },
+              {
+                "name": "ELBSubnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "EnvironmentType",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "SingleInstance"
+              },
+              {
+                "name": "InstanceType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "t3.micro"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "sg-06636659b4c388b51"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:elbv2:loadbalancer",
+                "resource": "",
+                "value": "sg-07120a98027212731"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:elbv2:loadbalancer",
+                "resource": "",
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "USE_AWS_S3",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "True"
+              },
+              {
+                "name": "VPCId",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "vpc-063665ff90b81d413"
+              }
+            ],
+            "solution_stack_name": "64bit Amazon Linux 2023 v4.12.1 running Docker",
+            "tags": null,
+            "tags_all": null,
+            "template_name": null,
+            "tier": "WebServer",
+            "triggers": null,
+            "version_label": "backend-95239e16",
+            "wait_for_ready_timeout": "20m"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "setting"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cognito_user_pool.chat_user_pool",
+            "aws_cognito_user_pool_client.chat_user_pool_client",
+            "aws_db_instance.postgres_db",
+            "aws_db_subnet_group.db_subnets",
+            "aws_elastic_beanstalk_application.chat_app",
+            "aws_elastic_beanstalk_application_version.backend_version",
+            "aws_internet_gateway.igw",
+            "aws_route_table.public",
+            "aws_route_table_association.public_a_assoc",
+            "aws_route_table_association.public_b_assoc",
+            "aws_s3_bucket.media_bucket",
+            "aws_s3_object.backend_zip",
+            "aws_security_group.eb_elb_sg",
+            "aws_security_group.eb_instances_sg",
+            "aws_subnet.public_a",
+            "aws_subnet.public_b",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available",
+            "data.aws_caller_identity.current",
+            "data.aws_elastic_beanstalk_solution_stack.docker",
+            "random_id.backend_version_id",
+            "random_id.bucket_id",
+            "random_string.django_secret_key"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_environment",
+      "name": "frontend_env",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "all_settings": [
+              {
+                "name": "AppSource",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2023_1.0.2416.0_20260408134349/sampleapp/EBSampleApp-Docker.zip"
+              },
+              {
+                "name": "Application Healthcheck URL",
+                "namespace": "aws:elasticbeanstalk:application",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "AssociatePublicIpAddress",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "Automatically Terminate Unhealthy Instances",
+                "namespace": "aws:elasticbeanstalk:monitoring",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "Availability Zones",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "Any"
+              },
+              {
+                "name": "BatchSize",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "100"
+              },
+              {
+                "name": "BatchSizeType",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "Percentage"
+              },
+              {
+                "name": "BlockDeviceMappings",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "BreachDuration",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "5"
+              },
+              {
+                "name": "ConfigDocument",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "{\"Version\":1,\"CloudWatchMetrics\":{\"Instance\":{\"CPUIrq\":null,\"LoadAverage5min\":null,\"ApplicationRequests5xx\":null,\"ApplicationRequests4xx\":null,\"CPUUser\":null,\"LoadAverage1min\":null,\"ApplicationLatencyP50\":null,\"CPUIdle\":null,\"InstanceHealth\":null,\"ApplicationLatencyP95\":null,\"ApplicationLatencyP85\":null,\"RootFilesystemUtil\":null,\"ApplicationLatencyP90\":null,\"CPUSystem\":null,\"ApplicationLatencyP75\":null,\"CPUSoftirq\":null,\"ApplicationLatencyP10\":null,\"ApplicationLatencyP99\":null,\"ApplicationRequestsTotal\":null,\"ApplicationLatencyP99.9\":null,\"ApplicationRequests3xx\":null,\"ApplicationRequests2xx\":null,\"CPUIowait\":null,\"CPUNice\":null},\"Environment\":{\"InstancesSevere\":null,\"InstancesDegraded\":null,\"ApplicationRequests5xx\":null,\"ApplicationRequests4xx\":null,\"ApplicationLatencyP50\":null,\"ApplicationLatencyP95\":null,\"ApplicationLatencyP85\":null,\"InstancesUnknown\":null,\"ApplicationLatencyP90\":null,\"InstancesInfo\":null,\"InstancesPending\":null,\"ApplicationLatencyP75\":null,\"ApplicationLatencyP10\":null,\"ApplicationLatencyP99\":null,\"ApplicationRequestsTotal\":null,\"InstancesNoData\":null,\"ApplicationLatencyP99.9\":null,\"ApplicationRequests3xx\":null,\"ApplicationRequests2xx\":null,\"InstancesOk\":null,\"InstancesWarning\":null}}}"
+              },
+              {
+                "name": "ConnectionDrainingEnabled",
+                "namespace": "aws:elb:policies",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "ConnectionDrainingTimeout",
+                "namespace": "aws:elb:policies",
+                "resource": "",
+                "value": "20"
+              },
+              {
+                "name": "ConnectionSettingIdleTimeout",
+                "namespace": "aws:elb:policies",
+                "resource": "",
+                "value": "60"
+              },
+              {
+                "name": "Cooldown",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "360"
+              },
+              {
+                "name": "CrossZone",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "Custom Availability Zones",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "DefaultSSHPort",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "22"
+              },
+              {
+                "name": "DeleteOnTerminate",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "DeleteOnTerminate",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "DeploymentPolicy",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "AllAtOnce"
+              },
+              {
+                "name": "DisableDefaultEC2SecurityGroup",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "DisableIMDSv1",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "EC2KeyName",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ELBScheme",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "public"
+              },
+              {
+                "name": "ELBSubnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "EnableCapacityRebalancing",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "EnableSpot",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "EnhancedHealthAuthEnabled",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "EnvironmentType",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "LoadBalanced"
+              },
+              {
+                "name": "EnvironmentVariables",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "EvaluationPeriods",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "1"
+              },
+              {
+                "name": "ExternalExtensionsS3Bucket",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ExternalExtensionsS3Key",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "HasCoupledDatabase",
+                "namespace": "aws:rds:dbinstance",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "HealthCheckSuccessThreshold",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "Ok"
+              },
+              {
+                "name": "HealthStreamingEnabled",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "HealthyThreshold",
+                "namespace": "aws:elb:healthcheck",
+                "resource": "",
+                "value": "3"
+              },
+              {
+                "name": "HooksPkgUrl",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_docker_amazon_linux_2023_1.0.2416.0_20260408134349/lib/hooks.tar.gz"
+              },
+              {
+                "name": "IamInstanceProfile",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "LabInstanceProfile"
+              },
+              {
+                "name": "IgnoreHealthCheck",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "ImageId",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "ami-06c7f214716eb7e2f"
+              },
+              {
+                "name": "InstancePort",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "80"
+              },
+              {
+                "name": "InstancePort",
+                "namespace": "aws:elb:listener:80",
+                "resource": "",
+                "value": "80"
+              },
+              {
+                "name": "InstanceProtocol",
+                "namespace": "aws:elb:listener:80",
+                "resource": "",
+                "value": "HTTP"
+              },
+              {
+                "name": "InstanceRefreshEnabled",
+                "namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "InstanceType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "t3.micro"
+              },
+              {
+                "name": "InstanceTypeFamily",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "t3"
+              },
+              {
+                "name": "InstanceTypes",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "t3.micro"
+              },
+              {
+                "name": "Interval",
+                "namespace": "aws:elb:healthcheck",
+                "resource": "",
+                "value": "10"
+              },
+              {
+                "name": "LaunchTemplateTagPropagationEnabled",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "LaunchTimeout",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "0"
+              },
+              {
+                "name": "LaunchType",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "Migration"
+              },
+              {
+                "name": "ListenerEnabled",
+                "namespace": "aws:elb:listener:80",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "ListenerProtocol",
+                "namespace": "aws:elb:listener:80",
+                "resource": "",
+                "value": "HTTP"
+              },
+              {
+                "name": "LoadBalancerHTTPPort",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": "80"
+              },
+              {
+                "name": "LoadBalancerHTTPSPort",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": "OFF"
+              },
+              {
+                "name": "LoadBalancerPortProtocol",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": "HTTP"
+              },
+              {
+                "name": "LoadBalancerSSLPortProtocol",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": "HTTPS"
+              },
+              {
+                "name": "LoadBalancerType",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "classic"
+              },
+              {
+                "name": "LogPublicationControl",
+                "namespace": "aws:elasticbeanstalk:hostmanager",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "LowerBreachScaleIncrement",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "-1"
+              },
+              {
+                "name": "LowerThreshold",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "2000000"
+              },
+              {
+                "name": "ManagedActionsEnabled",
+                "namespace": "aws:elasticbeanstalk:managedactions",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "MaxBatchSize",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "MaxSize",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "4"
+              },
+              {
+                "name": "MeasureName",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "NetworkOut"
+              },
+              {
+                "name": "MinInstancesInService",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "MinSize",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "1"
+              },
+              {
+                "name": "MonitoringInterval",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "5 minute"
+              },
+              {
+                "name": "Notification Endpoint",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "Notification Protocol",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": "email"
+              },
+              {
+                "name": "Notification Topic ARN",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "Notification Topic Name",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "PauseTime",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "Period",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "5"
+              },
+              {
+                "name": "PreferredStartTime",
+                "namespace": "aws:elasticbeanstalk:managedactions",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ProxyServer",
+                "namespace": "aws:elasticbeanstalk:environment:proxy",
+                "resource": "",
+                "value": "nginx"
+              },
+              {
+                "name": "RetentionInDays",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                "resource": "",
+                "value": "7"
+              },
+              {
+                "name": "RetentionInDays",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                "resource": "",
+                "value": "7"
+              },
+              {
+                "name": "RollbackLaunchOnFailure",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "RollingUpdateEnabled",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "RollingUpdateType",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": "Time"
+              },
+              {
+                "name": "RootVolumeIOPS",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "RootVolumeSize",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "RootVolumeThroughput",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "RootVolumeType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "SSHSourceRestriction",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "tcp,22,22,0.0.0.0/0"
+              },
+              {
+                "name": "SSLCertificateId",
+                "namespace": "aws:elb:listener:80",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "SSLCertificateId",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "sg-06636659b4c388b51"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:elb:loadbalancer",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ServiceRole",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "AWSServiceRoleForElasticBeanstalk"
+              },
+              {
+                "name": "ServiceRoleForManagedUpdates",
+                "namespace": "aws:elasticbeanstalk:managedactions",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "SpotAllocationStrategy",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "capacity-optimized"
+              },
+              {
+                "name": "SpotFleetOnDemandAboveBasePercentage",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "70"
+              },
+              {
+                "name": "SpotFleetOnDemandBase",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "0"
+              },
+              {
+                "name": "SpotMaxPrice",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "Statistic",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "Average"
+              },
+              {
+                "name": "StreamLogs",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "SupportedArchitectures",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "x86_64"
+              },
+              {
+                "name": "SystemType",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "enhanced"
+              },
+              {
+                "name": "Target",
+                "namespace": "aws:elb:healthcheck",
+                "resource": "",
+                "value": "TCP:80"
+              },
+              {
+                "name": "Timeout",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": "PT30M"
+              },
+              {
+                "name": "Timeout",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "600"
+              },
+              {
+                "name": "Timeout",
+                "namespace": "aws:elb:healthcheck",
+                "resource": "",
+                "value": "5"
+              },
+              {
+                "name": "UnhealthyThreshold",
+                "namespace": "aws:elb:healthcheck",
+                "resource": "",
+                "value": "5"
+              },
+              {
+                "name": "Unit",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "Bytes"
+              },
+              {
+                "name": "UpdateLevel",
+                "namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "UpperBreachScaleIncrement",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "1"
+              },
+              {
+                "name": "UpperThreshold",
+                "namespace": "aws:autoscaling:trigger",
+                "resource": "",
+                "value": "6000000"
+              },
+              {
+                "name": "VPCId",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "vpc-063665ff90b81d413"
+              },
+              {
+                "name": "XRayEnabled",
+                "namespace": "aws:elasticbeanstalk:xray",
+                "resource": "",
+                "value": "false"
+              }
+            ],
+            "application": "chatapp",
+            "arn": "arn:aws:elasticbeanstalk:us-east-1:467659112385:environment/chatapp/chat-frontend-env",
+            "autoscaling_groups": [
+              "awseb-e-vnkrspfpmn-stack-AWSEBAutoScalingGroup-dPrT9fHESs4Z"
+            ],
+            "cname": "chat-frontend-env.eba-wax2chgt.us-east-1.elasticbeanstalk.com",
+            "cname_prefix": "",
+            "description": "",
+            "endpoint_url": "awseb-e-v-AWSEBLoa-74VT7V6KEZCB-1935019689.us-east-1.elb.amazonaws.com",
+            "id": "e-vnkrspfpmn",
+            "instances": [
+              "i-0765c5e1bbd68bb4a"
+            ],
+            "launch_configurations": [
+              "awseb-e-vnkrspfpmn-stack-AWSEBAutoScalingLaunchConfiguration-kOBfVzcAVlaR"
+            ],
+            "load_balancers": [
+              "awseb-e-v-AWSEBLoa-74VT7V6KEZCB"
+            ],
+            "name": "chat-frontend-env",
+            "platform_arn": "arn:aws:elasticbeanstalk:us-east-1::platform/Docker running on 64bit Amazon Linux 2023/4.12.1",
+            "poll_interval": null,
+            "queues": [],
+            "setting": [
+              {
+                "name": "AssociatePublicIpAddress",
+                "namespace": "aws:ec2:vpc",
+                "resource": null,
+                "value": "true"
+              },
+              {
+                "name": "ELBSubnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": null,
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "InstanceType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": null,
+                "value": "t3.micro"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": null,
+                "value": "sg-06636659b4c388b51"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:elbv2:loadbalancer",
+                "resource": "",
+                "value": "sg-07120a98027212731"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": null,
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:elbv2:loadbalancer",
+                "resource": "",
+                "value": "subnet-065d58e146f1cfdea,subnet-08a54eba411970a92"
+              },
+              {
+                "name": "VPCId",
+                "namespace": "aws:ec2:vpc",
+                "resource": null,
+                "value": "vpc-063665ff90b81d413"
+              }
+            ],
+            "solution_stack_name": "64bit Amazon Linux 2023 v4.12.1 running Docker",
+            "tags": {},
+            "tags_all": {},
+            "template_name": null,
+            "tier": "WebServer",
+            "triggers": [],
+            "version_label": "frontend-7b307460",
+            "wait_for_ready_timeout": "20m"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_elastic_beanstalk_application.chat_app",
+            "aws_elastic_beanstalk_application_version.frontend_version",
+            "aws_internet_gateway.igw",
+            "aws_route_table.public",
+            "aws_route_table_association.public_a_assoc",
+            "aws_route_table_association.public_b_assoc",
+            "aws_s3_bucket.media_bucket",
+            "aws_s3_object.frontend_zip",
+            "aws_security_group.eb_elb_sg",
+            "aws_security_group.eb_instances_sg",
+            "aws_subnet.public_a",
+            "aws_subnet.public_b",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available",
+            "data.aws_elastic_beanstalk_solution_stack.docker",
+            "random_id.bucket_id",
+            "random_id.frontend_version_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_instance_profile",
+      "name": "LabInstanceProfile",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "eb_instance_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "eb_service_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "eb_instance_attach",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy_attachment",
+      "name": "eb_service_attach",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "igw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:internet-gateway/igw-056a5f7f113465579",
+            "id": "igw-056a5f7f113465579",
+            "owner_id": "467659112385",
+            "tags": {
+              "Name": "chatapp-igw"
+            },
+            "tags_all": {
+              "Name": "chatapp-igw"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:route-table/rtb-0a92da2564c63fdb4",
+            "id": "rtb-0a92da2564c63fdb4",
+            "owner_id": "467659112385",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-056a5f7f113465579",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.igw",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public_a_assoc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0c920f00cf355e7c9",
+            "route_table_id": "rtb-0a92da2564c63fdb4",
+            "subnet_id": "subnet-065d58e146f1cfdea",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.igw",
+            "aws_route_table.public",
+            "aws_subnet.public_a",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public_b_assoc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0ab677dfab76be0ee",
+            "route_table_id": "rtb-0a92da2564c63fdb4",
+            "subnet_id": "subnet-08a54eba411970a92",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.igw",
+            "aws_route_table.public",
+            "aws_subnet.public_b",
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "media_bucket",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::chatapp-media-bucket-78ac27be",
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "bucket_domain_name": "chatapp-media-bucket-78ac27be.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "chatapp-media-bucket-78ac27be.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "a92ea892b32631e7ff5efc940a0ac2447d7909ebb659a51a495077b7df3592fb",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "chatapp-media-bucket-78ac27be",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"arn:aws:s3:::chatapp-media-bucket-78ac27be/*\",\"Sid\":\"PublicReadGetObject\"}],\"Version\":\"2012-10-17\"}",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "random_id.bucket_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "media_bucket_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "id": "chatapp-media-bucket-78ac27be",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"arn:aws:s3:::chatapp-media-bucket-78ac27be/*\",\"Sid\":\"PublicReadGetObject\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.media_bucket",
+            "aws_s3_bucket_public_access_block.media_bucket_public_access",
+            "random_id.bucket_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "media_bucket_public_access",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": false,
+            "block_public_policy": false,
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "id": "chatapp-media-bucket-78ac27be",
+            "ignore_public_acls": false,
+            "restrict_public_buckets": false
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.media_bucket",
+            "random_id.bucket_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_object",
+      "name": "backend_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::chatapp-media-bucket-78ac27be/backend-src.zip",
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_crc64nvme": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "application/zip",
+            "etag": "5bd3fba84007fef73340e17e2fa337dc",
+            "force_destroy": false,
+            "id": "chatapp-media-bucket-78ac27be/backend-src.zip",
+            "key": "backend-src.zip",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../deploy/backend-src.zip",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.media_bucket",
+            "random_id.bucket_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_object",
+      "name": "frontend_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acl": null,
+            "arn": "arn:aws:s3:::chatapp-media-bucket-78ac27be/frontend-src.zip",
+            "bucket": "chatapp-media-bucket-78ac27be",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "checksum_algorithm": null,
+            "checksum_crc32": "",
+            "checksum_crc32c": "",
+            "checksum_crc64nvme": "",
+            "checksum_sha1": "",
+            "checksum_sha256": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "application/zip",
+            "etag": "2f2a2b6633d3f3c9a25f8e5a61d42232",
+            "force_destroy": false,
+            "id": "chatapp-media-bucket-78ac27be/frontend-src.zip",
+            "key": "frontend-src.zip",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "override_provider": [],
+            "server_side_encryption": "AES256",
+            "source": "./../deploy/frontend-src.zip",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {},
+            "version_id": "",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.media_bucket",
+            "random_id.bucket_id"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "eb_elb_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:security-group/sg-07120a98027212731",
+            "description": "Managed by Terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-07120a98027212731",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTP",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              },
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "HTTPS",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 443
+              }
+            ],
+            "name": "chatapp-elb-sg",
+            "name_prefix": "",
+            "owner_id": "467659112385",
+            "revoke_rules_on_delete": false,
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "eb_instances_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:security-group/sg-06636659b4c388b51",
+            "description": "Managed by Terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-06636659b4c388b51",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "Allow from ELB",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-07120a98027212731"
+                ],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "chatapp-instances-sg",
+            "name_prefix": "",
+            "owner_id": "467659112385",
+            "revoke_rules_on_delete": false,
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.eb_elb_sg",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:subnet/subnet-065d58e146f1cfdea",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az6",
+            "cidr_block": "10.0.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-065d58e146f1cfdea",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "467659112385",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "chatapp-public-a"
+            },
+            "tags_all": {
+              "Name": "chatapp-public-a"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public_b",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:subnet/subnet-08a54eba411970a92",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.0.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-08a54eba411970a92",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "467659112385",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "chatapp-public-b"
+            },
+            "tags_all": {
+              "Name": "chatapp-public-b"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-063665ff90b81d413"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:467659112385:vpc/vpc-063665ff90b81d413",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-0bd9760c2c59d2807",
+            "default_route_table_id": "rtb-00ffe59a377cadaf1",
+            "default_security_group_id": "sg-05e121e9c30d0313f",
+            "dhcp_options_id": "dopt-07066446520f36487",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-063665ff90b81d413",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-00ffe59a377cadaf1",
+            "owner_id": "467659112385",
+            "tags": {
+              "Name": "chatapp-vpc"
+            },
+            "tags_all": {
+              "Name": "chatapp-vpc"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_id",
+      "name": "backend_version_id",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "b64_std": "lSOeFg==",
+            "b64_url": "lSOeFg",
+            "byte_length": 4,
+            "dec": "2502139414",
+            "hex": "95239e16",
+            "id": "lSOeFg",
+            "keepers": null,
+            "prefix": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_id",
+      "name": "bucket_id",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "b64_std": "eKwnvg==",
+            "b64_url": "eKwnvg",
+            "byte_length": 4,
+            "dec": "2024548286",
+            "hex": "78ac27be",
+            "id": "eKwnvg",
+            "keepers": null,
+            "prefix": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_id",
+      "name": "frontend_version_id",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "b64_std": "ezB0YA==",
+            "b64_url": "ezB0YA",
+            "byte_length": 4,
+            "dec": "2066773088",
+            "hex": "7b307460",
+            "id": "ezB0YA",
+            "keepers": null,
+            "prefix": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_string",
+      "name": "django_secret_key",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "id": "uWM%+PUZGexPt]N\u00263gkaxo$tUi+fB(JGF6+Q)R_T_P$BkCsWbR",
+            "keepers": null,
+            "length": 50,
+            "lower": true,
+            "min_lower": 0,
+            "min_numeric": 0,
+            "min_special": 0,
+            "min_upper": 0,
+            "number": true,
+            "numeric": true,
+            "override_special": null,
+            "result": "uWM%+PUZGexPt]N\u00263gkaxo$tUi+fB(JGF6+Q)R_T_P$BkCsWbR",
+            "special": true,
+            "upper": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
