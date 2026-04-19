@@ -1,2 +1,25 @@
-.idea
-certs
+# IntelliJ/VSCode/IDEA
+.idea/
+.vscode/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+*.tfvars
+*.tfvars.json
+
+# Certyfikaty i klucze
+certs/
+
+# Pliki tymczasowe
+*.bak
+*.tmp
+
+# Logi
+*.log
+
+# Inne
+*.zip

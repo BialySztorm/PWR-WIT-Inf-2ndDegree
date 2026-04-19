@@ -143,6 +143,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite (dev)
     "http://127.0.0.1:5173",  # Vite (dev)
+    "http://chat-frontend-env.eba-p7x2jwnj.us-east-1.elasticbeanstalk.com",  # AWS Elastic Beanstalk (prod)
 ]
 
 # Na AWS dodaj URL frontendu przez CORS_ALLOWED_ORIGINS_PATTERN lub zmienną środowiskową

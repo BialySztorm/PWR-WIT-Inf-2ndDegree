@@ -79,17 +79,45 @@ function Pack-Frontend {
         # If we are packaging prebuilt dist, create a simple Dockerfile that copies dist into nginx
         $tmpDocker = Join-Path $tmp 'Dockerfile'
         $dockerContents = @'
-FROM nginx:1.27-alpine
-# If 'dist' directory exists in build context copy it to a temp location
-COPY dist /tmp_dist
-# Copy everything (covers case when dist contents were packed at archive root)
-COPY . /usr/share/nginx/html
-# If /tmp_dist exists, merge its contents into webroot (overwriting if needed)
-RUN if [ -d /tmp_dist ]; then cp -a /tmp_dist/. /usr/share/nginx/html/; fi
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM httpd:2.4-alpine
+
+# Instalacja openssl i generowanie certyfikatu
+RUN apk add --no-cache openssl && \
+    mkdir -p /usr/local/apache2/conf/ssl && \
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /usr/local/apache2/conf/ssl/selfsigned.key \
+    -out /usr/local/apache2/conf/ssl/selfsigned.crt \
+    -subj "/CN=localhost"
+
+# Kopiowanie plików aplikacji
+COPY dist/. /usr/local/apache2/htdocs/
+RUN chmod -R 755 /usr/local/apache2/htdocs && chown -R www-data:www-data /usr/local/apache2/htdocs
+
+RUN sed -i '/^#LoadModule ssl_module/s/^#//' /usr/local/apache2/conf/httpd.conf
+
+COPY ssl.conf /usr/local/apache2/conf/extra/ssl.conf
+RUN echo "Include conf/extra/ssl.conf" >> /usr/local/apache2/conf/httpd.conf
+
+EXPOSE 80 443
 '@
         Set-Content -Path $tmpDocker -Value $dockerContents -Encoding UTF8
+        python (Join-Path $scriptDir 'remove_bom.py') $tmpDocker
+
+        $tmpSSLConf = Join-Path $tmp 'ssl.conf'
+        $sslConfContents = @'
+<VirtualHost *:443>
+    DocumentRoot "/usr/local/apache2/htdocs"
+    SSLEngine on
+    SSLCertificateFile "/usr/local/apache2/conf/ssl/selfsigned.crt"
+    SSLCertificateKeyFile "/usr/local/apache2/conf/ssl/selfsigned.key"
+    <Directory "/usr/local/apache2/htdocs">
+        Require all granted
+        Options -Indexes
+    </Directory>
+</VirtualHost>
+'@
+        Set-Content -Path $tmpSSLConf -Value $sslConfContents -Encoding UTF8
+        python (Join-Path $scriptDir 'remove_bom.py') $tmpSSLConf
         # Do NOT include package.json or tsconfig when packaging prebuilt dist: prefer using prebuilt files
         # (including package.json/tsconfig would cause Dockerfile to try building on EB)
 
