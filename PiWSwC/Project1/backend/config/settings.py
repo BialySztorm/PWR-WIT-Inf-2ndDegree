@@ -29,7 +29,7 @@ allowed = os.getenv("DJANGO_ALLOWED_HOSTS") or os.getenv("ALLOWED_HOSTS")
 if allowed:
     ALLOWED_HOSTS = [h.strip() for h in allowed.split(",") if h.strip()]
 else:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+    ALLOWED_HOSTS = ['api.bylena3.cloud', 'api.bylena3.cloud',"localhost", "127.0.0.1", '.compute.internal']
 
 
 # Application definition
@@ -144,6 +144,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite (dev)
     "http://127.0.0.1:5173",  # Vite (dev)
     "http://chat-frontend-env.eba-p7x2jwnj.us-east-1.elasticbeanstalk.com",  # AWS Elastic Beanstalk (prod)
+    "https://api.bylena3.cloud", # AWS API Gateway (prod)
+    "https://bylena3.cloud",
 ]
 
 # Na AWS dodaj URL frontendu przez CORS_ALLOWED_ORIGINS_PATTERN lub zmienną środowiskową
@@ -151,3 +153,8 @@ cors_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 if cors_origins and cors_origins[0]:
     CORS_ALLOWED_ORIGINS.extend([o.strip() for o in cors_origins if o.strip()])
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}

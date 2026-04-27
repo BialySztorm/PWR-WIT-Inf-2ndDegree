@@ -79,11 +79,11 @@ resource "aws_elastic_beanstalk_environment" "frontend_env" {
   }
 
   # Security groups: przypisanie ELB i instancji
-  setting {
-    namespace = "aws:elbv2:loadbalancer"
-    name      = "Subnets"
-    value     = join(",", [aws_subnet.public_a.id, aws_subnet.public_b.id])
-  }
+  # setting {
+  #   namespace = "aws:elbv2:loadbalancer"
+  #   name      = "Subnets"
+  #   value     = join(",", [aws_subnet.public_a.id, aws_subnet.public_b.id])
+  # }
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
@@ -93,6 +93,56 @@ resource "aws_elastic_beanstalk_environment" "frontend_env" {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SecurityGroups"
     value     = aws_security_group.eb_instances_sg.id
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "EnvironmentType"
+    value     = "LoadBalanced"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerType"
+    value     = "application"
+  }
+
+  # Konfiguracja portu 80 (HTTP) - standardowa, bez przekierowania na razie
+  setting {
+    namespace = "aws:elbv2:listener:default"
+    name      = "ListenerEnabled"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:default"
+    name      = "Protocol"
+    value     = "HTTP"
+  }
+
+  # Konfiguracja portu 443 (HTTPS) - KLUCZOWA DLA SSL
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "ListenerEnabled"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "Protocol"
+    value     = "HTTPS"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLCertificateArns"
+    value     = aws_acm_certificate.cert.arn
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "DefaultProcess"
+    value     = "default"
   }
 
   # Podpinamy wersję aplikacji (z S3)
@@ -187,7 +237,7 @@ resource "aws_elastic_beanstalk_environment" "backend_env" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "COGNITO_ISSUER"
-    value     = "https://cognito-idp.${data.aws_caller_identity.current.account_id}.${var.aws_region}.amazonaws.com/${aws_cognito_user_pool.chat_user_pool.id}"
+    value     = "https://cognito-idp.${var.aws_region}.amazonaws.com/${aws_cognito_user_pool.chat_user_pool.id}"
   }
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
@@ -202,7 +252,7 @@ resource "aws_elastic_beanstalk_environment" "backend_env" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DJANGO_ALLOWED_HOSTS"
-    value     = "localhost,127.0.0.1,*.elasticbeanstalk.com"
+    value     = "api.bylena3.cloud,bylena3.cloud,localhost,127.0.0.1,.compute.internal,10.0.0.0/16"
   }
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
@@ -233,11 +283,11 @@ resource "aws_elastic_beanstalk_environment" "backend_env" {
   }
 
   # Security groups: przypisanie ELB i instancji
-  setting {
-    namespace = "aws:elbv2:loadbalancer"
-    name      = "Subnets"
-    value     = join(",", [aws_subnet.public_a.id, aws_subnet.public_b.id])
-  }
+  # setting {
+  #   namespace = "aws:elbv2:loadbalancer"
+  #   name      = "Subnets"
+  #   value     = join(",", [aws_subnet.public_a.id, aws_subnet.public_b.id])
+  # }
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
@@ -279,7 +329,31 @@ resource "aws_elastic_beanstalk_environment" "backend_env" {
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"
-    value     = "SingleInstance"
+    value     = "LoadBalanced"
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerType"
+    value     = "application"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "Protocol"
+    value     = "HTTPS"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:443"
+    name      = "SSLCertificateArns"
+    value     = aws_acm_certificate.cert.arn
+  }
+
+  setting {
+  namespace = "aws:elasticbeanstalk:environment:process:default"
+  name      = "HealthCheckPath"
+  value     = "/health"
+}
 }
 

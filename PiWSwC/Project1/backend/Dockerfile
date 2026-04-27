@@ -10,9 +10,11 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY . /app
 
-RUN mkdir -p /app/staticfiles
+RUN mkdir -p /app/staticfiles /app/media
 
-EXPOSE 80 443
+RUN python manage.py collectstatic --noinput --clear
+
+EXPOSE 80
 
 # gunicorn: config.wsgi is the module and application callable for Django
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:80", "--workers", "2", "--log-level", "info"]
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:80", "--timeout", "120", "--workers", "2", "--log-level", "info"]

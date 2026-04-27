@@ -18,5 +18,15 @@ resource "aws_cognito_user_pool_client" "chat_user_pool_client" {
     "ALLOW_REFRESH_TOKEN_AUTH",
     "ALLOW_USER_SRP_AUTH"
   ]
+  supported_identity_providers = ["COGNITO"]
+  callback_urls                = ["https://bylena3.cloud"]
+  logout_urls                  = ["https://bylena3.cloud"]
+  allowed_oauth_flows          = ["code", "implicit"]
+  allowed_oauth_scopes         = ["email", "openid", "profile"]
+  allowed_oauth_flows_user_pool_client = true
 }
 
+resource "aws_cognito_user_pool_domain" "main" {
+  domain       = "chatapp-auth-${random_id.frontend_version_id.hex}" # Unikalny prefiks
+  user_pool_id = aws_cognito_user_pool.chat_user_pool.id
+}

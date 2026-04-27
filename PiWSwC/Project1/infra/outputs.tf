@@ -13,4 +13,6 @@ output "backend_url" {
 output "db_endpoint" {
   value = aws_db_instance.postgres_db.address
 }
-
+output "name_servers" {
+  value = aws_route53_zone.main.name_servers
+}

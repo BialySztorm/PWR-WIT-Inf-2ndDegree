@@ -4,6 +4,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed, PermissionDenied
+from rest_framework.permissions import AllowAny
 import jwt
 
 from .models import Message, UploadedMedia, UserProfile
@@ -20,10 +21,12 @@ class HealthView(APIView):
 class MediaListView(generics.ListAPIView):
     queryset = UploadedMedia.objects.order_by("-uploaded_at")
     serializer_class = UploadedMediaSerializer
+    permission_classes = [AllowAny]
 
 class MessageListCreateView(generics.ListCreateAPIView):
     queryset = Message.objects.order_by("-created_at")
     serializer_class = MessageSerializer
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         payload = get_payload_from_request(self.request)
@@ -40,6 +43,7 @@ class MediaListCreateView(generics.ListCreateAPIView):
     queryset = UploadedMedia.objects.order_by("-uploaded_at")
     serializer_class = UploadedMediaSerializer
     parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         payload = get_payload_from_request(self.request)
@@ -65,18 +69,12 @@ class MediaDownloadView(APIView):
 
 class MeView(APIView):
     def get(self, request):
-        try:
-            payload = get_payload_from_request(request)
-        except (jwt.InvalidTokenError, jwt.PyJWTError, RuntimeError) as e:
-            raise AuthenticationFailed(str(e))
+        payload = get_payload_from_request(request)
 
         if not payload:
-            raise AuthenticationFailed("Missing Bearer token")
+            return Response({"friendly_name": "Guest", "is_authenticated": False}, status=200)
 
         sub = payload.get("sub")
-        if not sub:
-            raise AuthenticationFailed("Token missing sub")
-
         profile, _ = UserProfile.objects.get_or_create(sub=sub)
         return Response(UserProfileSerializer(profile).data)
 

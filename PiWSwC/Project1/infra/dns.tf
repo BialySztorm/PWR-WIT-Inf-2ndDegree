@@ -1,0 +1,58 @@
+resource "aws_route53_zone" "main" {
+  name = "bylena3.cloud"
+}
+
+resource "aws_acm_certificate" "cert" {
+  domain_name       = "bylena3.cloud"
+  subject_alternative_names = ["*.bylena3.cloud"]
+  validation_method = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_route53_record" "cert_validation" {
+  for_each = {
+    for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = aws_route53_zone.main.zone_id
+}
+
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
+}
+
+resource "aws_route53_record" "frontend_root" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "bylena3.cloud"
+  type    = "A"
+
+  alias {
+    name                   = aws_elastic_beanstalk_environment.frontend_env.endpoint_url
+    zone_id                = "Z35SXDOTRQ7X7K"
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "backend_api" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "api.bylena3.cloud"
+  type    = "A"
+
+  alias {
+    name                   = aws_elastic_beanstalk_environment.backend_env.endpoint_url
+    zone_id                = "Z35SXDOTRQ7X7K"
+    evaluate_target_health = true
+  }
+}

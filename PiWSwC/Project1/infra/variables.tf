@@ -31,6 +31,6 @@ variable "aws_region" {
 variable "frontend_url" {
   description = "Frontend URL for CORS configuration (e.g., https://myapp.example.com). If not provided, uses *.elasticbeanstalk.com"
   type        = string
-  default     = ""
+  default     = "https://bylena3.cloud"
 }
 

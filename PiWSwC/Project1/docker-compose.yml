@@ -27,7 +27,7 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "8000:8000"
+      - "8000:80"
     volumes:
       - ./backend:/app
       - media:/app/media
