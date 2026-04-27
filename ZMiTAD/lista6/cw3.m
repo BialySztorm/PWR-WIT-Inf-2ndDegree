@@ -1,0 +1,30 @@
+% EXERCISE 3
+
+clc
+clear
+close all
+
+X = [3415 4556 5772 5432
+1593 1937 2242 2794
+1976 2056 2240 2085
+1526 1594 1644 1705
+1538 1634 1866 1769
+983 1086 1135 1177
+1050 1209 1245 977
+1861 2087 2054 2018
+1714 2415 2361 2424
+1320 1621 1624 1551
+1276 1377 1522 1412
+1263 1279 1350 1490
+1271 1417 1583 1513
+1436 1310 1357 1468];
+
+[p, tbl, stats] = friedman(X,1,'off');
+fprintf('Friedman p=%.4g\n', p);
+if p < 0.05
+    disp('Istotny wpływ kwartału na sprzedaż!');
+else
+    disp('Brak istotnego wpływu kwartału na sprzedaż.');
+end
+% Analiza post-hoc:
+multcompare(stats);
