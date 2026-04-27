@@ -1,0 +1,43 @@
+=== Run information ===
+
+Evaluator:    weka.attributeSelection.GainRatioAttributeEval 
+Search:       weka.attributeSelection.Ranker -T 0.001 -N -1
+Relation:     XXXXXXL1 2-weka.filters.unsupervised.attribute.MergeManyValues-C2-Ldobry-R2,3-unset-class-temporarily-weka.filters.unsupervised.attribute.MergeManyValues-C2-Lz?y-R1,2,3-unset-class-temporarily-weka.filters.unsupervised.attribute.Remove-R11-weka.filters.unsupervised.attribute.Reorder-R1,3,4,5,6,7,8,9,10,2-weka.filters.unsupervised.attribute.Discretize-B5-M-1.0-Rfirst-last-precision6-weka.filters.supervised.attribute.Discretize-Rfirst-last-precision6
+Instances:    1581
+Attributes:   10
+              ID
+              kwota_kredytu
+              wiek
+              pÅ‚eÄ‡
+              rodzaj_ÅºrÃ³dÅ‚a_dochodu
+              miesieczny_dochod_netto
+              ktore_rolowanie
+              okres_w_jakim_pobieraÅ‚_dochÃ³d
+              okres_w_jakim_bÄ™dzie_pobieraÅ‚_dochÃ³d
+              status_pozyczki
+Evaluation mode:    evaluate on all training data
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+	Threshold for discarding attributes:   0.001 
+
+Attribute Evaluator (supervised, Class (nominal): 10 status_pozyczki):
+	Gain Ratio feature evaluator
+
+Ranked attributes:
+ 0.06955   6 miesieczny_dochod_netto
+ 0.0511    7 ktore_rolowanie
+ 0.01806   4 pÅ‚eÄ‡
+ 0.01585   9 okres_w_jakim_bÄ™dzie_pobieraÅ‚_dochÃ³d
+ 0.01337   3 wiek
+ 0.00696   2 kwota_kredytu
+ 0.00481   5 rodzaj_ÅºrÃ³dÅ‚a_dochodu
+ 0.00332   8 okres_w_jakim_pobieraÅ‚_dochÃ³d
+ 0.00245   1 ID
+
+Selected attributes: 6,7,4,9,3,2,5,8,1 : 9
+
