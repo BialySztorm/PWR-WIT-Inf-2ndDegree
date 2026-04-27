@@ -2,3 +2,5 @@
 *.exe
 
 PiWSwC/Project1/.idea/
+
+*.idea/
