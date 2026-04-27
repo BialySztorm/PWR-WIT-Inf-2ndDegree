@@ -1,13 +1,12 @@
 import os
 import sys
-from openpyxl import load_workbook
-from xlrd import open_workbook
 import pandas as pd
+import arff
 
 
 def xls_to_arff(xls_file, output_file):
     """
-    Konwertuje plik XLS na format ARFF
+    Konwertuje plik XLS na format ARFF używając liac-arff
 
     Args:
         xls_file: ścieżka do pliku XLS
@@ -31,38 +30,64 @@ def xls_to_arff(xls_file, output_file):
         print(f"Plik {xls_file} jest pusty")
         return False
 
-    # Napisz plik ARFF
-    with open(output_file, 'w', encoding='utf-8') as f:
-        # Nagłówek
-        f.write("% Relation generated from " + os.path.basename(xls_file) + "\n")
-        f.write("@relation " + os.path.splitext(os.path.basename(xls_file))[0] + "\n\n")
+    # Przygotuj dane dla arff
+    data = []
+    attributes = []
 
-        # Atrybuty
-        f.write("@attribute ID numeric\n")
-        for col in df.columns:
-            col_name = str(col).replace(" ", "_").replace("'", "")
-            # Autodetekt typu danych
-            if df[col].dtype == 'object':
-                unique_vals = df[col].dropna().unique()
-                if len(unique_vals) <= 20:  # Jeśli mało unikalnych wartości = nominalne
-                    vals = ','.join([f"'{str(v).strip()}'" for v in unique_vals if pd.notna(v)])
-                    f.write(f"@attribute {col_name} {{{vals}}}\n")
-                else:
-                    f.write(f"@attribute {col_name} string\n")
+    # Dodaj ID
+    attributes.append(('ID', 'NUMERIC'))
+
+    # Analizuj kolumny
+    for col in df.columns:
+        col_name = str(col).replace(" ", "_").replace("'", "")
+
+        # Sprawdź typ danych kolumny
+        col_data = df[col].dropna()
+
+        if len(col_data) == 0:
+            # Kolumna pusta
+            attributes.append((col_name, 'STRING'))
+        elif df[col].dtype in ['int64', 'int32', 'float64', 'float32']:
+            # Typ numeryczny
+            attributes.append((col_name, 'NUMERIC'))
+        else:
+            # Typ tekstowy - sprawdź czy nominalne czy string
+            unique_vals = col_data.unique()
+            if len(unique_vals) <= 20:
+                # Mało unikalnych wartości = nominalne
+                nominal_vals = sorted([str(v).strip() for v in unique_vals])
+                attributes.append((col_name, nominal_vals))
             else:
-                f.write(f"@attribute {col_name} numeric\n")
+                # Dużo unikalnych wartości = string
+                attributes.append((col_name, 'STRING'))
 
-        f.write("\n@data\n")
-
-        # Dane
-        for idx, row in df.iterrows():
-            values = [str(idx + 1)]  # ID
-            for val in row:
-                if pd.isna(val):
-                    values.append("?")
+    # Przygotuj wiersze danych
+    for idx, row in df.iterrows():
+        values = [idx + 1]  # ID
+        for i, val in enumerate(row):
+            if pd.isna(val):
+                values.append(None)
+            else:
+                # Jeśli atrybut jest numeryczny, zwróć liczbę
+                if attributes[i + 1][1] == 'NUMERIC':
+                    try:
+                        values.append(float(val))
+                    except:
+                        values.append(None)
                 else:
-                    values.append(f"'{str(val).strip()}'")
-            f.write(",".join(values) + "\n")
+                    values.append(str(val).strip())
+        data.append(values)
+
+    # Stwórz obiekt ARFF i zapisz
+    arff_dict = {
+        'description': f'Relation generated from {os.path.basename(xls_file)}',
+        'relation': os.path.splitext(os.path.basename(xls_file))[0],
+        'attributes': attributes,
+        'data': data
+    }
+
+    with open(output_file, 'w', encoding='utf-8') as f:
+        arff.dump(arff_dict, f)
 
     return True
 
