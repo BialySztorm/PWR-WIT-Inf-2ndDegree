@@ -29,7 +29,6 @@ descriptive_stats = df[variables].describe().T
 print("\nWskaźniki opisowe:")
 print(descriptive_stats[['mean', 'std', 'min', '50%', 'max']].round(4))
 
-# Estymacja punktowa - szczegółowo
 print("\n--- SZCZEGÓŁOWE ESTYMATORY PUNKTOWE ---")
 for var in variables:
     mean = df[var].mean()
@@ -70,7 +69,6 @@ print("\n--- TEST ANOVA: Szczęście między regionami ---")
 print("Hipoteza H0: μ₁ = μ₂ = ... = μₖ (brak różnic między regionami)")
 print("Hipoteza H1: Przynajmniej dwa regiony różnią się średnią\n")
 
-# Statystyka opisowa dla każdego regionu
 print("Statystyka opisowa dla Happiness Score po regionach:\n")
 region_stats = df.groupby('Region')['Happiness Score'].agg([
     ('n', 'count'),
@@ -81,7 +79,6 @@ region_stats = df.groupby('Region')['Happiness Score'].agg([
 ]).round(4)
 print(region_stats)
 
-# ANOVA
 groups = [group['Happiness Score'].values for name, group in df.groupby('Region')]
 f_stat, p_value_anova = stats.f_oneway(*groups)
 
@@ -161,21 +158,21 @@ else:
 # %% [markdown]
 # # 8. TEST NORMALNOŚCI
 # %%
-stat_shapiro, p_shapiro = stats.shapiro(df['Happiness Score'])
+jb_stat, jb_p = stats.jarque_bera(df['Happiness Score'].dropna())
 print(f"\nZmienna: Happiness Score")
-print(f"Statystyka: {stat_shapiro:.4f}")
-print(f"p-value:    {p_shapiro:.6f}")
+print(f"Jarque-Bera statystyka: {jb_stat:.4f}")
+print(f"p-value:                {jb_p:.3e}")
 
-if p_shapiro < 0.05:
-    print(f"✗ Rozkład NIE jest normalny (p < 0.05)")
+if jb_p < 0.05:
+    print("✗ Rozkład NIE jest normalny (Jarque–Bera p < 0.05)")
 else:
-    print(f"✓ Możemy założyć rozkład normalny (p >= 0.05)")
+    print("✓ Brak podstaw do odrzucenia normalności (Jarque–Bera p ≥ 0.05)")
 
 # %% [markdown]
 # # 9. WIZUALIZACJA
 # %%
 print("\n" + "=" * 80)
-print("GENEROWANIE I ZAPIS WYKRESÓW (OSOBNE PLIKI)...")
+print("GENEROWANIE I ZAPIS WYKRESÓW...")
 print("=" * 80)
 
 # Folder na wykresy
@@ -275,7 +272,7 @@ save_scatter_vs_happiness('Freedom', '06_freedom_vs_happiness.png', color='tab:o
 save_scatter_vs_happiness('Family', '07_family_vs_happiness.png', color='tab:purple')
 save_scatter_vs_happiness('Trust (Government Corruption)', '08_trust_vs_happiness.png', color='tab:brown')
 
-# Opcjonalnie (jeśli też chcesz pokazać wszystkie kolumny z pliku 2015)
+# Opcjonalne (nie użyte w porównaniu)
 save_scatter_vs_happiness('Generosity', '09_generosity_vs_happiness.png', color='tab:pink')
 save_scatter_vs_happiness('Dystopia Residual', '10_dystopia_vs_happiness.png', color='tab:gray')
 
@@ -368,11 +365,11 @@ else:
 
 print("\n7. ROZKŁAD SZCZĘŚCIA - CZY NORMALNY?")
 print("-" * 80)
-print(f"Test Shapiro-Wilk: p-value = {p_shapiro:.6f}")
+print(f"Test Jarque-Bera:: p-value = {jb_p:.6f}")
 
-if p_shapiro >= 0.05:
+if jb_p >= 0.05:
     print(f"✓ Szczęście rozkłada się normalnie")
-    print(f"  To dobrze - nasze testy statystyczne są wiarygodne")
+    print(f"  To dobrze - testy statystyczne są wiarygodne")
 else:
     print(f"✗ Szczęście NIE rozkłada się całkowicie normalnie")
-    print(f"  Ale nasza analiza ANOVA jest na tyle odporna, że wyniki są wiarygodne")
+    print(f"  Ale analiza ANOVA jest na tyle odporna, że wyniki są wiarygodne")
