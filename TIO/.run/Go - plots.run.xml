@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Go - plots" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <working_directory value="$PROJECT_DIR$/go-ga" />
+    <parameters value="plots" />
+    <kind value="PACKAGE" />
+    <package value="dronepath/cmd/dronega" />
+    <directory value="$PROJECT_DIR$/go-ga" />
+    <filePath value="$PROJECT_DIR$/go-ga/cmd/dronega/main.go" />
+    <method v="2" />
+  </configuration>
+</component>

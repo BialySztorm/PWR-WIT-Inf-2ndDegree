@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Julia - plots" type="JuliaRunConfiguration" factoryName="Julia">
+    <option name="environmentVariables" />
+    <option name="juliaProject" value="$PROJECT_DIR$/julia-aco" />
+    <option name="juliaSdkPath" />
+    <option name="juliaThreads" />
+    <option name="launchScript" />
+    <option name="launchScriptContent" />
+    <option name="programArguments" value="plots" />
+    <option name="scriptPath" value="$PROJECT_DIR$/julia-aco/src/run.jl" />
+    <option name="workingDirectory" value="$PROJECT_DIR$/julia-aco" />
+    <method v="2" />
+  </configuration>
+</component>

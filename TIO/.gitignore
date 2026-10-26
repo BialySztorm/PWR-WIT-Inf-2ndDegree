@@ -1,0 +1,6 @@
+# Rust build artifacts (task 2)
+rust-ga/target/
+
+# Python caches
+__pycache__/
+*.pyc

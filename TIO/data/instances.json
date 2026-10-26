@@ -1,0 +1,30 @@
+{
+  "instances": [
+    {
+      "slug": "flat",
+      "type": "synthetic",
+      "label": "flat (synthetic)"
+    },
+    {
+      "slug": "hilly",
+      "type": "synthetic",
+      "label": "hilly (synthetic)"
+    },
+    {
+      "slug": "real_canyon",
+      "type": "real",
+      "label": "Grand Canyon - Yavapai Point, AZ, USA",
+      "lat": 36.0702,
+      "lon": -112.1258,
+      "source": "aster30m"
+    },
+    {
+      "slug": "real_silesia",
+      "type": "real",
+      "label": "Silesian Upland - near Gliwice, Poland",
+      "lat": 50.013917,
+      "lon": 18.386611,
+      "source": "aster30m"
+    }
+  ]
+}
