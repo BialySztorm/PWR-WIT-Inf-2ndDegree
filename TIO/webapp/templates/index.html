@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Drone Coverage Route Viewer</title>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+<body>
+    <header>
+        <h1>Drone Coverage Route Viewer</h1>
+        <p class="subtitle">Compare baseline, GA, and ACO coverage routes across synthetic and real-world terrain.</p>
+    </header>
+
+    <main>
+        <section id="controls-panel" class="panel">
+            <label>Instance
+                <select id="instance-select"></select>
+            </label>
+            <label>Method
+                <select id="method-select"></select>
+            </label>
+            <label>View
+                <select id="view-select">
+                    <option value="2d">2D heatmap</option>
+                    <option value="3d">3D surface</option>
+                </select>
+            </label>
+            <button id="play-btn">Play animation</button>
+        </section>
+
+        <div class="main-grid">
+            <section id="viz-panel" class="panel">
+                <div id="cost-summary"></div>
+                <div id="route-plot"></div>
+            </section>
+
+            <section id="results-panel" class="panel">
+                <h2>Method comparison</h2>
+                <table id="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Config</th>
+                            <th>Total (s)</th>
+                            <th>Flight (s)</th>
+                            <th>Turn</th>
+                            <th>Climb</th>
+                            <th>Swaps</th>
+                            <th>Violations</th>
+                            <th>Feasible</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <h2>Existing plots</h2>
+                <div id="plots-section"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox hidden">
+        <img id="lightbox-img" src="" alt="" />
+    </div>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
