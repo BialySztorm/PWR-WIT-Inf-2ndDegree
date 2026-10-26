@@ -1,0 +1,14 @@
+name = "DronePath"
+uuid = "eb478de0-4a18-4930-ba39-b413782c0ba1"
+version = "0.1.0"
+authors = ["WhiteStorm <andrzejmmm1@gmail.com>"]
+
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+
+[compat]
+CSV = "0.10.17"
+JSON3 = "1.14.3"
+Plots = "1.41.7"
